@@ -1,0 +1,110 @@
+# Autonomous Vehicle Prototype - Systems Engineering
+
+## 📌 Project Overview
+This repository contains the Systems Engineering specifications, structural architecture, and 3D prototyping constraints for an autonomous vehicle. The vehicle is designed to track a 2cm black line on a grey surface and autonomously detect and avoid physical obstacles.
+
+This project follows a strict Model-Based Systems Engineering (MBSE) approach using SysML, with a focus on physical prototyping, hardware interfaces, and Additive Manufacturing constraints.
+
+## 📂 Repository Structure
+* `/docs` - Contains the full Systems Engineering Specification (PDF/Word).
+* `/cad` - Contains the manifold, watertight `.stl` and `.stp` files for the 3D-printed custom mounts.
+* `/src` - (Future) Contains the Arduino microcontroller logic for sensor processing and motor actuation.
+* `/diagrams` - Contains source code for PlantUML and Mermaid diagrams.
+
+## ⚙️ Hardware Components
+The system is strictly constrained to the following provided components:
+* 1x Arduino Microcontroller
+* 1x Motor Controller
+* 2x DC Motors with tires & 1x Ball bearing front wheel
+* 2x IR-Sensors (Downward-facing for line tracking)
+* 2x Ultrasonic Sensors (Forward-facing for obstacle avoidance)
+* 1x 11.5V LiPo Battery & 1x Breadboard
+* 1x 10mm Plywood chassis
+
+## 📐 SysML Requirements Diagram
+*(GitHub automatically renders this Mermaid code into a visual diagram!)*
+
+```mermaid
+requirementDiagram
+
+requirement REQ_001 {
+    id: "REQ-001"
+    text: "The vehicle shall operate autonomously."
+    risk: high
+    verifymethod: demonstration
+}
+
+requirement REQ_002 {
+    id: "REQ-002"
+    text: "Vehicle shall track a 2cm black line on a grey surface."
+    risk: high
+    verifymethod: test
+}
+
+requirement REQ_003 {
+    id: "REQ-003"
+    text: "Vehicle shall detect and avoid obstacles."
+    risk: high
+    verifymethod: test
+}
+
+requirement REQ_103 {
+    id: "REQ-103"
+    text: "System shall safely distribute 11.5V LiPo power."
+    risk: high
+    verifymethod: test
+}
+
+element IR_Sensors {
+    type: "Block"
+}
+
+element Power_Module {
+    type: "Block"
+}
+
+REQ_001 - contains -> REQ_002
+REQ_001 - contains -> REQ_003
+
+IR_Sensors - satisfies -> REQ_002
+Power_Module - satisfies -> REQ_103
+
+classDiagram
+    class AutonomousVehicle {
+        <<package>>
+    }
+    class StructuralModule {
+        <<package>>
+        Plywood Chassis
+        Custom 3D Mounts
+    }
+    class PowerModule {
+        <<package>>
+        11.5V LiPo Battery
+    }
+    class PerceptionModule {
+        <<package>>
+        Downward IR Sensors
+        Forward Ultrasonic Sensors
+    }
+    class ActuationModule {
+        <<package>>
+        Motor Controller
+        DC Motors
+    }
+    class ControlModule {
+        <<package>>
+        Arduino
+    }
+
+    AutonomousVehicle *-- StructuralModule
+    AutonomousVehicle *-- PowerModule
+    AutonomousVehicle *-- PerceptionModule
+    AutonomousVehicle *-- ActuationModule
+    AutonomousVehicle *-- ControlModule
+
+    StructuralModule ..> PowerModule : <<houses>>
+    StructuralModule ..> PerceptionModule : <<houses>>
+    StructuralModule ..> ActuationModule : <<houses>>
+    StructuralModule ..> ControlModule : <<houses>>
+                         
