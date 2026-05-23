@@ -1,0 +1,94 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Page-1" id="hB2IzHtgl_9MFrSWJ7xC">
+    <mxGraphModel dx="703" dy="832" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="bdd_frame" value="&lt;b&gt;bdd&lt;/b&gt; [Package] Structure [Prototype Car Architecture]" style="shape=folder;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;fillColor=#F8F9FA;strokeColor=#333333;tabWidth=320;tabHeight=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1020" height="640" as="geometry" />
+        </mxCell>
+        <mxCell id="car_block" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«block»&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;text-align:center;&quot;&gt;&lt;b&gt;Prototype Car&lt;/b&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#E3F2FD;strokeColor=#1E88E5;strokeWidth=2;" vertex="1" parent="1">
+          <mxGeometry x="470" y="110" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="power_sub" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«block»&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;text-align:center;&quot;&gt;&lt;b&gt;Power Subsystem&lt;/b&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#FFF3E0;strokeColor=#FB8C00;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="90" y="260" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="compute_sub" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«block»&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;text-align:center;&quot;&gt;&lt;b&gt;Compute Subsystem&lt;/b&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#E8F5E9;strokeColor=#43A047;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="340" y="260" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="motion_sub" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«block»&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;text-align:center;&quot;&gt;&lt;b&gt;Motion Subsystem&lt;/b&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="600" y="260" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="sensor_sub" value="&lt;p style=&quot;margin:0px;margin-top:4px;text-align:center;&quot;&gt;«block»&lt;/p&gt;&lt;hr size=&quot;1&quot; style=&quot;border-style:solid;&quot;/&gt;&lt;p style=&quot;margin:0px;margin-left:4px;text-align:center;&quot;&gt;&lt;b&gt;Sensor Subsystem&lt;/b&gt;&lt;/p&gt;" style="verticalAlign=top;align=left;overflow=fill;html=1;whiteSpace=wrap;fillColor=#E0F7FA;strokeColor=#00ACC1;strokeWidth=1.5;" vertex="1" parent="1">
+          <mxGeometry x="850" y="260" width="160" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="part_battery" value="[1] Battery" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#FB8C00;" vertex="1" parent="1">
+          <mxGeometry x="90" y="390" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_arduino" value="[1] Arduino Board" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#43A047;" vertex="1" parent="1">
+          <mxGeometry x="340" y="390" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_breadboard" value="[1] Breadboard" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#43A047;" vertex="1" parent="1">
+          <mxGeometry x="340" y="450" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_driver" value="[1] Motor Driver" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="600" y="390" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_motors" value="[2] DC Motor" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="600" y="450" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_wheels" value="[2] Drive Wheel" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="600" y="510" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_front_wheel" value="[1] Front Caster Wheel" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="600" y="570" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_ir" value="[2] IR Line Sensor" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#00ACC1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="390" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="part_sonic" value="[1] Ultrasonic Sensor" style="html=1;whiteSpace=wrap;fillColor=#FFFFFF;strokeColor=#00ACC1;" vertex="1" parent="1">
+          <mxGeometry x="850" y="450" width="160" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="edge1" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;startArrow=diamond;startFill=1;startSize=12;sourcePerimeterSpacing=0;targetPerimeterSpacing=0;exitX=0.5;exitY=1;exitDx=0;exitDy=0;html=1;" edge="1" parent="1" source="car_block" target="power_sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge2" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;startArrow=diamond;startFill=1;startSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="car_block" target="compute_sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge3" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;startArrow=diamond;startFill=1;startSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="car_block" target="motion_sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="edge4" style="edgeStyle=orthogonalEdgeStyle;endArrow=block;endFill=0;startArrow=diamond;startFill=1;startSize=12;html=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;" edge="1" parent="1" source="car_block" target="sensor_sub">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge1" style="edgeStyle=straight;endArrow=none;startArrow=diamond;startFill=1;startSize=10;" edge="1" parent="1" source="power_sub" target="part_battery">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge2" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="compute_sub" target="part_arduino">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge3" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="compute_sub" target="part_breadboard">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge4" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="motion_sub" target="part_driver">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge5" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="motion_sub" target="part_motors">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge6" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="motion_sub" target="part_wheels">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge7" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="motion_sub" target="part_front_wheel">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge8" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sensor_sub" target="part_ir">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="sub_edge9" style="edgeStyle=orthogonalEdgeStyle;endArrow=none;startArrow=diamond;startFill=1;startSize=10;exitX=0-5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="sensor_sub" target="part_sonic">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
