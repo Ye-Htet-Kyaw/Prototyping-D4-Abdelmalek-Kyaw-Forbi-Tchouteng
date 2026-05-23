@@ -1,0 +1,109 @@
+<mxfile host="Electron" agent="Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/28.1.2 Chrome/138.0.7204.243 Electron/37.4.0 Safari/537.36" version="28.1.2">
+  <diagram name="Page-1" id="0myjHyWXX9tj9TEN8FX7">
+    <mxGraphModel dx="703" dy="832" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="827" pageHeight="1169" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="ibd_frame" value="&lt;b&gt;ibd&lt;/b&gt; [Block] Prototype Car [Internal Component Interconnections]" style="shape=folder;whiteSpace=wrap;html=1;align=left;verticalAlign=top;spacingLeft=10;fillColor=#F8F9FA;strokeColor=#333333;tabWidth=380;tabHeight=30;" vertex="1" parent="1">
+          <mxGeometry x="40" y="40" width="1020" height="740" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_battery" value="&lt;b&gt;bat : Battery&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#FFF3E0;strokeColor=#FB8C00;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="80" y="110" width="160" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="port_bat_out" value="p_out" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#FFE0B2;strokeColor=#FB8C00;fontSize=10;" vertex="1" parent="ibd_battery">
+          <mxGeometry x="145" y="35" width="15" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_breadboard" value="&lt;b&gt;brd : Breadboard&lt;/b&gt;&lt;br&gt;(5V/GND Rails)" style="html=1;whiteSpace=wrap;fillColor=#E8F5E9;strokeColor=#43A047;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="360" y="110" width="200" height="90" as="geometry" />
+        </mxCell>
+        <mxCell id="port_brd_in" value="p_in" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="ibd_breadboard">
+          <mxGeometry y="35" width="15" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="port_brd_dist" value="dist" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="ibd_breadboard">
+          <mxGeometry x="100" y="70" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_arduino" value="&lt;b&gt;uno : Arduino Board&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#E8F5E9;strokeColor=#43A047;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="280" y="310" width="240" height="130" as="geometry" />
+        </mxCell>
+        <mxCell id="port_ard_p" value="p_in" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="ibd_arduino">
+          <mxGeometry x="110" width="20" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="port_ard_io" value="io_pins" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="ibd_arduino">
+          <mxGeometry x="225" y="50" width="15" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="port_ard_sens" value="sens_io" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#43A047;fontSize=10;" vertex="1" parent="ibd_arduino">
+          <mxGeometry y="50" width="15" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_driver" value="&lt;b&gt;drv : Motor Driver&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;verticalAlign=top;align=center;spacingTop=4;" vertex="1" parent="1">
+          <mxGeometry x="680" y="290" width="200" height="160" as="geometry" />
+        </mxCell>
+        <mxCell id="port_drv_p" value="p_in" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#8E24AA;fontSize=10;" vertex="1" parent="ibd_driver">
+          <mxGeometry y="20" width="15" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="port_drv_ctrl" value="ctrl" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#8E24AA;fontSize=10;" vertex="1" parent="ibd_driver">
+          <mxGeometry y="80" width="15" height="20" as="geometry" />
+        </mxCell>
+        <mxCell id="port_drv_outL" value="m_outL" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#8E24AA;fontSize=10;" vertex="1" parent="ibd_driver">
+          <mxGeometry x="40" y="145" width="45" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="port_drv_outR" value="m_outR" style="shape=rectangle;whiteSpace=wrap;html=1;fillColor=#E1BEE7;strokeColor=#8E24AA;fontSize=10;" vertex="1" parent="ibd_driver">
+          <mxGeometry x="120" y="145" width="45" height="15" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_motorL" value="&lt;b&gt;m_left : Motor&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="640" y="520" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_motorR" value="&lt;b&gt;m_right : Motor&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="810" y="520" width="110" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_wheelL" value="&lt;b&gt;w_left : Wheel&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="640" y="630" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_wheelR" value="&lt;b&gt;w_right : Wheel&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="810" y="630" width="110" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_caster" value="&lt;b&gt;w_front : Caster Wheel&lt;/b&gt;&lt;br&gt;(Passive/Unmotorized)" style="html=1;whiteSpace=wrap;fillColor=#F3E5F5;strokeColor=#8E24AA;" vertex="1" parent="1">
+          <mxGeometry x="710" y="710" width="150" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_ir" value="&lt;b&gt;ir : IR Sensors&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#E0F7FA;strokeColor=#00ACC1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="300" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="ibd_sonic" value="&lt;b&gt;us : Ultrasonic&lt;/b&gt;" style="html=1;whiteSpace=wrap;fillColor=#E0F7FA;strokeColor=#00ACC1;" vertex="1" parent="1">
+          <mxGeometry x="70" y="400" width="130" height="50" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_p1" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF0000;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="port_bat_out" target="port_brd_in">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_p2" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF0000;strokeWidth=2;endArrow=block;" edge="1" parent="1" source="port_brd_dist" target="port_ard_p">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_p3" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF0000;strokeWidth=2;endArrow=block;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="port_bat_out" target="port_drv_p">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_ctrl" style="edgeStyle=straight;strokeColor=#0000FF;strokeWidth=2;endArrow=block;startArrow=block;startFill=1;" edge="1" parent="1" source="port_ard_io" target="port_drv_ctrl">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_ir" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#008080;strokeWidth=1.5;endArrow=block;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.25;entryDx=0;entryDy=0;" edge="1" parent="1" source="ibd_ir" target="port_ard_sens">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_sonic" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#008080;strokeWidth=1.5;endArrow=block;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.75;entryDx=0;entryDy=0;" edge="1" parent="1" source="ibd_sonic" target="port_ard_sens">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_motL" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF33FF;strokeWidth=2;endArrow=block;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="port_drv_outL" target="ibd_motorL">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="flow_motR" style="edgeStyle=orthogonalEdgeStyle;strokeColor=#FF33FF;strokeWidth=2;endArrow=block;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="port_drv_outR" target="ibd_motorR">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mech_L" style="edgeStyle=straight;strokeColor=#555555;strokeWidth=3;endArrow=none;dashed=1;" edge="1" parent="1" source="ibd_motorL" target="ibd_wheelL">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="mech_R" style="edgeStyle=straight;strokeColor=#555555;strokeWidth=3;endArrow=none;dashed=1;" edge="1" parent="1" source="ibd_motorR" target="ibd_wheelR">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="legend_box" value="&lt;b&gt;Flow Legend:&lt;/b&gt;&lt;br&gt;&lt;font color=&quot;#ff0000&quot;&gt;▬▬&lt;/font&gt; Electrical Power (⚡)&lt;br&gt;&lt;font color=&quot;#0000ff&quot;&gt;▬▬&lt;/font&gt; Logic / PWM Control (⎱)&lt;br&gt;&lt;font color=&quot;#008080&quot;&gt;▬▬&lt;/font&gt; Sensor Telemetry Data&lt;br&gt;&lt;font color=&quot;#555555&quot;&gt; - - - &lt;/font&gt; Mechanical Connection (⚙)" style="text;html=1;strokeColor=#cccccc;fillColor=#ffffff;verticalAlign=top;align=left;spacing=6;whiteSpace=wrap;" vertex="1" parent="1">
+          <mxGeometry x="80" y="550" width="220" height="100" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
