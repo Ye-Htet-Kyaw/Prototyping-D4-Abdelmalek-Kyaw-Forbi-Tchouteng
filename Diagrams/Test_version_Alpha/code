@@ -1,0 +1,42 @@
+flowchart TD
+    A(["Start"]) --> B["Setup: pins, serial, 3 s delay"]
+    B --> C["Read sensors: ultrasonic + both IR"]
+
+    C --> D{"Obstacle in range?"}
+    D -->|yes| AV1
+    D -->|no| E{"Both IR on black?"}
+
+    E -->|yes| F["Keep driving, 350 ms probe"]
+    F --> G{"Still black after 350 ms?"}
+    G -->|no, intersection| C
+    G -->|yes| H(["Stop line: motors off"])
+
+    E -->|no| I{"Right IR black only?"}
+    I -->|yes| J["Pivot left, ramped speed"]
+    J --> C
+    I -->|no| K{"Left IR black only?"}
+    K -->|yes| L["Pivot right, ramped speed"]
+    L --> C
+    K -->|no| M["Move forward, kick-start if stopped"]
+    M --> C
+
+    subgraph AVOID["Obstacle avoidance routine (new)"]
+        direction TB
+        AV1["Phase 1a: pivot right, fixed time, IR ignored"]
+        AV1 --> AV2["Phase 1b: arc left around obstacle, right wheel faster"]
+        AV2 --> AV3{"Left IR sees black?"}
+        AV3 -->|no, keep arcing| AV2
+        AV3 -->|yes| AV4["Phase 2: keep arcing across the line"]
+        AV4 --> AV5{"Right IR sees black?"}
+        AV5 -->|no, keep arcing| AV4
+        AV5 -->|yes| AV6["Phase 3: resume line following"]
+    end
+
+    AV6 --> C
+
+    classDef decision fill:#EEEDFE,stroke:#534AB7,color:#26215C
+    classDef avoid fill:#FAECE7,stroke:#993C1D,color:#4A1B0C
+    classDef halt fill:#FCEBEB,stroke:#A32D2D,color:#501313
+    class D,E,G,I,K,AV3,AV5 decision
+    class AV1,AV2,AV4,AV6 avoid
+    class H halt
