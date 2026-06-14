@@ -20,7 +20,7 @@ const int trigPin = 12;
 const int echoPin = 11;
 
 // =================================================================
-//   TUNABLE SETTINGS  (everything you adjust during testing)
+//   TUNABLE SETTINGS  
 // =================================================================
 
 // --- Driving ---
@@ -37,7 +37,7 @@ const unsigned long rampInterval = 75;    // ms between ramp steps
 // --- Stop line ---
 const unsigned long stopProbeTime = 350;  // ms of double-black = stop
 
-// --- Obstacle avoidance (NEW) ---
+// --- Obstacle avoidance  ---
 const int obstacleDistance       = 14;    // cm - trigger distance
 const int obstacleConfirm        = 2;     // readings in a row to confirm
 const unsigned long pingInterval = 60;    // ms between ultrasonic pings
