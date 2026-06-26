@@ -1,0 +1,147 @@
+OUR AUTONOMOUS VEHICLE STATE MACHINE DIAGRAM
+========================================
+
+Purpose
+-------
+The state machine diagram models the dynamic behaviour of the robot during execution.
+
+Unlike the use case diagram, which describes system goals, the state machine describes the internal operational logic and transitions between states.
+
+INITIALIZATION PHASE
+--------------------
+
+1. Power Off
+Initial inactive state.
+
+2. Initializing Controller
+The Arduino configures:
+
+- Motor pins
+- IR sensors
+- Ultrasonic sensor
+- Internal variables
+- Communication interfaces
+
+3. Calibrating Sensors
+The robot verifies:
+
+- IR sensor alignment
+- Ultrasonic functionality
+- Threshold values
+- Mechanical positioning
+
+4. Ready
+The robot waits for the operator to begin autonomous operation.
+
+AUTONOMOUS OPERATION
+--------------------
+
+5. Line Following
+Normal operating state.
+
+The robot continuously:
+
+- Reads left IR sensor
+- Reads right IR sensor
+- Corrects wheel speeds
+- Maintains alignment with the guide line
+
+Transitions:
+- Obstacle detected -> Obstacle Monitoring
+- Both sensors black for extended duration -> Final Stop Detection
+
+6. Obstacle Monitoring
+The ultrasonic sensor measures the distance to objects in front of the vehicle.
+
+If the measured distance falls below the safety threshold, the system transitions to obstacle response handling.
+
+7. Respond to Obstacle Pattern
+The controller evaluates the is180 flag.
+
+If is180 == false:
+    Transition to Dodge Obstacle.
+
+If is180 == true:
+    Transition to Perform 180° Turn.
+
+ODD OBSTACLE BEHAVIOUR
+----------------------
+
+8. Dodge Obstacle
+The robot performs a complete avoidance manoeuvre.
+
+Operational sequence:
+
+- Stop motors
+- Rotate left approximately 45 degrees
+- Move forward around the obstacle
+- Rotate right approximately 45 degrees
+- Search for the guide line
+- Reacquire the original path
+- Set is180 = true
+
+This ensures that the next obstacle encounter triggers a different response.
+
+EVEN OBSTACLE BEHAVIOUR
+-----------------------
+
+9. Perform 180° Turn
+The robot:
+
+- Stops
+- Rotates 180 degrees in place
+- Continues movement in the opposite direction
+- Sets is180 = false
+
+The system therefore alternates:
+
+Obstacle 1 -> Dodge
+Obstacle 2 -> 180° Turn
+Obstacle 3 -> Dodge
+Obstacle 4 -> 180° Turn
+and so on, from the way we did it.
+
+MISSION COMPLETION
+------------------
+
+10. Reacquire Line
+After any obstacle manoeuvre, the robot scans for the black track and restores normal line following behaviour.
+
+11. Detect Final Stop Line
+The mission endpoint occurs when:
+
+- Left IR sensor = BLACK
+- Right IR sensor = BLACK
+- Detection duration >= 350 milliseconds
+
+This prevents accidental stopping at intersections or curves.
+
+12. Complete Mission
+The controller executes:
+
+motorStop();
+
+The program then remains in a locked state until manual reset by the operator.
+
+FINAL SYSTEM LOGIC
+------------------
+
+Initialization
+    ↓
+Ready
+    ↓
+Line Following
+    ↓
+Obstacle?
+    ↓
+Respond to Pattern
+    ↓
+Dodge OR 180° Turn
+    ↓
+Reacquire Line
+    ↓
+Continue Line Following
+    ↓
+Detect Final Stop Line
+    ↓
+Complete Mission
