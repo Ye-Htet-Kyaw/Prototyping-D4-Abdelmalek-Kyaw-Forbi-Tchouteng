@@ -21,9 +21,10 @@ This robot utilizes a combination of infrared and ultrasonic sensing to navigate
 | Name | Description |
 |------------|------------|
 | Lectures | Lectures and handout provided by the Professor|
-| Coding | Arduino (.ino) source code & header files |
+| Firmware and Simulation | Arduino (.ino) source code & simulation files |
 | CAD | .STL and .STEP files for 3D-printed parts |
-| Docs | Circuit schematics, wiring diagrams and reports |
+| Diagrams| System Modelling Diagrams|
+| Docs | Report and Presentation |
 | Media | Project photos and demonstration videos |
 ---
 
