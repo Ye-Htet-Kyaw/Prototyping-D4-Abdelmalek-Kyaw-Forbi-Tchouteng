@@ -30,8 +30,8 @@ const int kickSpeed = 150;   // brief burst to START the motors
 const int kickTime  = 60;    // ms the burst lasts
 
 // --- Obstacle avoidance
-const int obstacleDistance       = 15;   // cm - trigger distance
-const int obstacleConfirm        = 4;    // confirmed readings before acting
+const int obstacleDistance       = 16;   // cm - trigger distance
+const int obstacleConfirm        = 3;    // confirmed readings before acting
 const unsigned long pingInterval = 60;   // ms between ultrasonic pings
 
 const int pivotSpeed             = 95;   // pivot speed for the 45-deg turns
