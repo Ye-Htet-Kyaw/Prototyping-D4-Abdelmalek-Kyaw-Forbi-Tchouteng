@@ -1,0 +1,319 @@
+// =================================================================
+//   LINE-FOLLOWING ROBOT CAR - Line Following + Obstacle Avoidance
+// =================================================================
+
+// --- PIN CONFIGURATION ---
+const int ENA = 5;
+const int IN1 = 6;
+const int IN2 = 7;
+const int IN3 = 8;
+const int IN4 = 9;
+const int ENB = 10;
+
+const int leftIR = 2;
+const int rightIR = 3;
+
+// Ultrasonic sensors (both)
+const int trigRight = 12;
+const int echoRight = 11;
+const int trigLeft  = A0;
+const int echoLeft  = A1;
+
+// =================================================================
+//   TUNABLE SETTINGS
+// =================================================================
+const int baseSpeed = 60;    // Normal speed on straight line
+const int turnSpeed = 70;    // Speed of the outer wheel during a turn
+
+const int kickSpeed = 120;   // brief burst to START the motors
+const int kickTime  = 50;    // ms the burst lasts
+
+// --- Obstacle avoidance ---
+const int obstacleDistance       = 10;   // cm - trigger distance
+const int obstacleConfirm        = 2;    // readings in a row to confirm
+const unsigned long pingInterval = 60;   // ms between ultrasonic pings
+const int pivotSpeed             = 70;   // Phase 1: blind pivot speed (slow)
+const unsigned long pivotTime    = 650;  // Phase 1: blind pivot duration (ms)
+const int arcOuterSpeed          = 75;   // Phase 2: arc, fast wheel
+const int arcInnerSpeed          = 55;   // Phase 2: arc, slow wheel
+const int realignSpeed           = 80;   // Phase 3: turn-right-to-settle speed
+const unsigned long avoidTimeout = 8000; // ms - give up if line not found
+
+int turnR = 0;
+int turnL = 0;
+// --- STATE / TIMING ---
+bool wasMoving = false;
+unsigned long lastLogTime = 0;
+const unsigned long logInterval = 500;
+
+unsigned long lastPingTime = 0;
+long lastDistL = 999;
+long lastDistR = 999;
+int  obstacleCount = 0;
+
+void setup() {
+  pinMode(ENA, OUTPUT);
+  pinMode(ENB, OUTPUT);
+  pinMode(IN1, OUTPUT);
+  pinMode(IN2, OUTPUT);
+  pinMode(IN3, OUTPUT);
+  pinMode(IN4, OUTPUT);
+
+  pinMode(leftIR, INPUT);
+  pinMode(rightIR, INPUT);
+
+  pinMode(trigRight, OUTPUT);
+  pinMode(echoRight, INPUT);
+  pinMode(trigLeft, OUTPUT);
+  pinMode(echoLeft, INPUT);
+
+  Serial.begin(9600);
+  Serial.println("--- Robot Car Telemetry Initialized ---");
+  
+  // --- SAFETY START DELAY ---
+  Serial.println("Starting in 3 seconds... Place robot on track!");
+  delay(3000); 
+  Serial.println("System GO!");
+}
+
+void loop() {
+
+  // --- OBSTACLE CHECK (runs first, on a timer) ---
+  if (millis() - lastPingTime >= pingInterval) {
+    lastPingTime = millis();
+    lastDistL = readDistanceCM(trigLeft, echoLeft);
+    lastDistR = readDistanceCM(trigRight, echoRight);
+    long closest = min(lastDistL, lastDistR);
+
+    if (closest <= obstacleDistance) obstacleCount++;
+    else                             obstacleCount = 0;
+
+    if (obstacleCount >= obstacleConfirm) {
+      obstacleCount = 0;
+      avoidObstacle();   // blocking maneuver, returns once back on the line
+      return;            // restart the loop afterwards
+    }
+  }
+
+  int leftIRState  = digitalRead(leftIR);
+  int rightIRState = digitalRead(rightIR);
+
+  // Serial Logging
+  if (millis() - lastLogTime >= logInterval) {
+    printSensorStatus(leftIRState, rightIRState);
+    lastLogTime = millis();
+  }
+
+  // --- LINE FOLLOWING LOGIC ---
+  
+  // Rule 1: BOTH IR on black -> STOP
+  if (leftIRState == HIGH && rightIRState == HIGH) {
+  unsigned long blackStartTime = millis(); // Record when we first hit double black
+    bool reachedStopLine = true;
+
+    // Move forward while monitoring how long both sensors stay black
+    // We check for up to 350 milliseconds. Adjust this time if needed!
+    while (millis() - blackStartTime < 350) {
+      moveForward(); 
+      
+      // If even ONE sensor goes back to WHITE during this time, 
+      // it means we successfully crossed an S-curve or intersection!
+      if (digitalRead(leftIR) == LOW || digitalRead(rightIR) == LOW) {
+        reachedStopLine = false; 
+        break; // Exit this tracking loop and go back to normal driving
+      }
+    }
+
+    // If both sensors STILL see black after 350ms, it's an intentional stop signal
+    if (reachedStopLine) {
+      Serial.println("--- STOP LINE DETECTED: Shutting down motors ---");
+      motorStop();
+      //while(1); // Infinite loop: Locks the robot here until you press Reset
+    }
+  }
+  // Rule 2: RIGHT IR on black -> smooth turn LEFT
+  else if (leftIRState == LOW && rightIRState == HIGH) {
+    turnR = 0; // Fixed capitalization
+    turnLeft(); 
+    if(turnL < 45) // Fixed capitalization
+      turnL += 15;  // Fixed capitalization
+  }
+  // Rule 3: LEFT IR on black -> smooth turn RIGHT
+  else if (leftIRState == HIGH && rightIRState == LOW) {
+    turnL = 0;
+    turnRight();
+    if(turnR < 45) // Fixed capitalization
+      turnR += 10;  // Fixed capitalization
+  }
+  // Rule 4: BOTH on white -> Go Straight
+  else {
+    turnR = 0;
+    turnL = 0;
+    moveForward();
+  }
+}
+
+// =================================================================
+//   OBSTACLE AVOIDANCE  (half-circle around the right side)
+// =================================================================
+
+void avoidObstacle() {
+  Serial.println(">>> OBSTACLE DETECTED - starting avoidance");
+
+  // Phase 1: blind pivot RIGHT to turn away from the line.
+  // IR is ignored here because the sensors sweep over our own line.
+  avoidPivotRight();
+
+  // Phase 2: arc around the obstacle until BOTH sensors are on black
+  // at the same time. That means the car is sitting across the line again.
+  startArcLeft();
+  unsigned long t0 = millis();
+  while ( !(digitalRead(leftIR) == HIGH && digitalRead(rightIR) == HIGH) ) {
+    if (millis() - t0 > avoidTimeout) { motorStop(); return; }
+  }
+  Serial.println(">>> Phase 2: both sensors on the line");
+
+  // Phase 3: turn RIGHT until ONLY the right sensor is on black,
+  // which lines the car up to drive straight down the line.
+  turnRightInPlace();
+  t0 = millis();
+  while ( !(digitalRead(rightIR) == HIGH && digitalRead(leftIR) == LOW) ) {
+    if (millis() - t0 > avoidTimeout) { motorStop(); return; }
+  }
+  Serial.println(">>> Phase 3: aligned with the line");
+
+  // Phase 4: go straight and hand control back to normal following.
+  turnL = 0;
+  turnR = 0;
+  wasMoving = true;
+  moveForward();
+  Serial.println(">>> Phase 4: resuming line following");
+}
+
+// Blind pivot to the physical RIGHT.
+// TEST ONCE: trigger a sensor with your hand and watch the nose -
+// it must swing RIGHT. If it swings LEFT: swap these four IN states
+// AND swap arcOuterSpeed/arcInnerSpeed in startArcLeft().
+void avoidPivotRight() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+
+  analogWrite(ENA, kickSpeed);
+  analogWrite(ENB, kickSpeed);
+  delay(kickTime);
+
+  analogWrite(ENA, pivotSpeed);
+  analogWrite(ENB, pivotSpeed);
+  delay(pivotTime);
+}
+
+// Phase 2 - left-curving arc: both wheels forward, outer wheel faster.
+void startArcLeft() {
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+
+  analogWrite(ENA, kickSpeed);
+  analogWrite(ENB, kickSpeed);
+  delay(kickTime);
+
+  analogWrite(ENA, arcOuterSpeed);
+  analogWrite(ENB, arcInnerSpeed);
+}
+
+// Phase 3 - steady turn RIGHT in place to settle onto the line.
+// Same pin pattern as avoidPivotRight = physical RIGHT on this chassis.
+void turnRightInPlace() {
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+
+  analogWrite(ENA, realignSpeed);
+  analogWrite(ENB, realignSpeed);
+}
+
+long readDistanceCM(int trig, int echo) {
+  digitalWrite(trig, LOW);
+  delayMicroseconds(2);
+  digitalWrite(trig, HIGH);
+  delayMicroseconds(10);
+  digitalWrite(trig, LOW);
+
+  long duration = pulseIn(echo, HIGH, 8000);
+  if (duration == 0) return 999;
+  return duration / 58;
+}
+
+void printSensorStatus(int irL, int irR) {
+  Serial.print("IR SENSORS | Left: ");
+  Serial.print(irL == HIGH ? "BLACK" : "WHITE");
+  Serial.print("  Right: ");
+  Serial.print(irR == HIGH ? "BLACK" : "WHITE");
+  Serial.print("  |  US L: ");
+  if (lastDistL >= 999) Serial.print("--"); else { Serial.print(lastDistL); Serial.print("cm"); }
+  Serial.print("  US R: ");
+  if (lastDistR >= 999) Serial.println("--"); else { Serial.print(lastDistR); Serial.println("cm"); }
+}
+
+// =================================================================
+//   MOVEMENT FUNCTIONS 
+// =================================================================
+
+void kickIfNeeded() {
+  if (!wasMoving) {
+    analogWrite(ENA, kickSpeed);
+    analogWrite(ENB, kickSpeed);
+    digitalWrite(IN1, HIGH);
+    digitalWrite(IN2, LOW);
+    digitalWrite(IN3, HIGH);
+    digitalWrite(IN4, LOW);
+    delay(kickTime);
+    wasMoving = true;
+  }
+}
+
+void moveForward() {
+  kickIfNeeded();
+  analogWrite(ENA, baseSpeed);
+  analogWrite(ENB, baseSpeed);
+  digitalWrite(IN1, HIGH);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, HIGH);
+  digitalWrite(IN4, LOW);
+}
+// Smooth Turn Right:
+void turnRight() {
+  analogWrite(ENA, turnSpeed + turnR); // Left motor runs
+  analogWrite(ENB, turnSpeed + turnR);         // Right motor
+  
+  digitalWrite(IN1, HIGH);     // Left Forward
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);      // Right backward
+  digitalWrite(IN4, HIGH);
+  wasMoving = true;
+}
+
+void turnLeft() {
+  analogWrite(ENA, turnSpeed + turnL);         // Left motor 
+  analogWrite(ENB, turnSpeed + turnL); // Right motor runs
+  
+  digitalWrite(IN1, LOW);      // Left backward
+  digitalWrite(IN2, HIGH);
+  digitalWrite(IN3, HIGH);     // Right Forward
+  digitalWrite(IN4, LOW);
+  wasMoving = true;
+}
+
+void motorStop() {
+  analogWrite(ENA, 0);
+  analogWrite(ENB, 0);
+  digitalWrite(IN1, LOW);
+  digitalWrite(IN2, LOW);
+  digitalWrite(IN3, LOW);
+  digitalWrite(IN4, LOW);
+  wasMoving = false;
+}
