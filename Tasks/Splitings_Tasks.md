@@ -89,6 +89,19 @@
       <td style="padding: 10px; text-align: center;">Firmware Review</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
     </tr>
+    <tr>
+      <td style="padding: 10px; text-align: center;">6</td>
+      <td style="padding: 10px; text-align: center;">Final Presentation</td>
+      <td style="padding: 10px; text-align: center;">Deliver 5-minute technical presentation summarizing system objective, SML diagrams, firmware implementation, Physical optimization and performance results.</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: Firmware Implementation <br> (06 July) </td>
+      <td style="padding: 10px; text-align: center;">02 July</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: Physical Optimization <br> (06 July) </td>
+      <td style="padding: 10px; text-align: center;">02 July</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: system objective and performance results</td>
+      <td style="padding: 10px; text-align: center;">02 July</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: SML diagrams</td>
+      <td style="padding: 10px; text-align: center;">02 July</td>
+    </tr>
 
   </tbody>
 </table>
