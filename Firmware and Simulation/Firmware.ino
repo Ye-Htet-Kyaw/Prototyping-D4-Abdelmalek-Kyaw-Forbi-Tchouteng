@@ -1,6 +1,6 @@
 // =================================================================
 //   LINE-FOLLOWING ROBOT CAR
-//   Line following + V-dogleg obstacle avoidance (left side)
+//   Line following + obstacle avoidance (left side)
 // =================================================================
 
 // --- PIN CONFIGURATION ---
@@ -24,7 +24,7 @@ const int echoLeft  = A1;
 //   TUNABLE SETTINGS
 // =================================================================
 const int baseSpeed = 65;    // Normal speed on straight line
-const int turnSpeed = 75;    // Speed of the outer wheel during a turn
+const int turnSpeed = 75;    // Speed of the wheels during a turn
 
 const int kickSpeed = 150;   // brief burst to START the motors
 const int kickTime  = 60;    // ms the burst lasts
@@ -34,18 +34,18 @@ const int obstacleDistance       = 16;   // cm - trigger distance
 const int obstacleConfirm        = 3;    // confirmed readings before acting
 const unsigned long pingInterval = 60;   // ms between ultrasonic pings
 
-const int pivotSpeed             = 95;   // pivot speed for the 45-deg turns
-const unsigned long pivotOutTime  = 200; // Phase 1: 45-deg pivot RIGHT     
-const int passSpeed              = 85;   // Phase 2: speed driving past obstacle
-const unsigned long passTime      = 600; // Phase 2: ~30 cm forward          
-const unsigned long pivotBackTime = 200; // Phase 3: 45-deg pivot LEFT       
+const int av_rotateSpeed             = 95;   // pivot speed for the 45-deg turns
+const unsigned long rotateOutTime  = 200; // Phase 1: 45-deg rotate LEFT
+const int passSpeed              = 85;   // Phase 1: speed driving past obstacle
+const unsigned long passTime      = 600; // Phase 1: ~30 cm forward          
+const unsigned long rotateBackTime = 200; // Phase 2: 45-deg pivot RIGHT 
 
-const int curveOuterSpeed        = 82;   // Phase 4:
-const int curveInnerSpeed        = 60;   // Phase 4:
-const unsigned long curveGuard    = 200; // Phase 4: ignore IR briefly at start
+const int curveOuterSpeed        = 82;   // Phase 3:
+const int curveInnerSpeed        = 60;   // Phase 3:
+const unsigned long curveGuard    = 200; // Phase 3: ignore IR briefly at start
 
-const int realignSpeed           = 90;   // Phase 5: small right straighten speed
-const unsigned long realignTime   = 150; // Phase 5: small right straighten  (CALIBRATE 3)
+const int realignSpeed           = 90;   // Phase 4: small left straighten speed
+const unsigned long realignTime   = 150; // Phase 4: small left straighten  (CALIBRATE 3)
 const unsigned long brakeTime     = 500; // pause between phases (kills momentum)
 const unsigned long avoidTimeout  = 6000;// ms - give up if line not found
 
@@ -85,7 +85,7 @@ void setup() {
   Serial.println("--- Robot Car Telemetry Initialized ---");
   
   // --- SAFETY START DELAY ---
-  Serial.println("Starting in 3 seconds... Place robot on track!");
+  Serial.println("Starting in 1 seconds... Place robot on track!");
   delay(1000); 
   Serial.println("System GO!");
 }
@@ -150,19 +150,19 @@ void loop() {
     }
   }
 
-  // Rule 2: RIGHT IR on black -> smooth turn Right
+  // Rule 2: RIGHT IR on black -> rotate turn Right
   else if (leftIRState == LOW && rightIRState == HIGH) {
     turnL = 0; // reset acceleration
-    turnRight();
+    RotateTurnRight();
 
     if(turnR < 45) 
       turnR += 15; // accelerate
   }
 
-  // Rule 3: LEFT IR on black -> smooth turn Left
+  // Rule 3: LEFT IR on black -> rotate turn Left
   else if (leftIRState == HIGH && rightIRState == LOW) {
     turnR = 0;
-    turnLeft();
+    RotateTurnLeft();
 
     if(turnL < 45)
       turnL += 10;  // acceleration
@@ -186,7 +186,7 @@ void avoidObstacle() {
   //Serial.println(">>> OBSTACLE - V-dogleg detour (right)");
   
   brakePause();
-  av_pivotLeft(pivotSpeed, pivotOutTime);     
+  av_rotateLeft(av_rotateSpeed, rotateOutTime);     
   //Serial.println(">>> phase 1: angled out");
   brakePause();
 
@@ -194,13 +194,13 @@ void avoidObstacle() {
   //Serial.println(">>> phase 2: passed obstacle");
   brakePause();
 
-  av_pivotRight(pivotSpeed, pivotBackTime);     
+  av_rotateRight(av_rotateSpeed, rotateBackTime);     
   //Serial.println(">>> phase 3: aimed back");
   brakePause();
 
-  //Serial.println(">>> phase 4: curving back, waiting for RIGHT sensor...");
+  //Serial.println(">>> phase 4: curving back, waiting for LEFT sensor...");
   if (!av_curveBackUntilLeftBlack()) {        // Phase 4: closed-loop
-    //Serial.println(">>> LINE NOT FOUND - stopped (raise passTime or pivotBackTime)");
+    //Serial.println(">>> LINE NOT FOUND - stopped (raise passTime or rotateBackTime)");
     motorStop();
     return;
   }
@@ -209,9 +209,8 @@ void avoidObstacle() {
   brakePause();
 
   while(digitalRead(leftIR) == LOW){
-    av_turnLeft(); 
+    av_pivotLeft(); 
   }
-  //av_pivotLeft(realignSpeed, realignTime);    // Phase 5: small left straighten
   //Serial.println(">>> phase 5: straightened");
   brakePause();
 
@@ -220,7 +219,7 @@ void avoidObstacle() {
   wasMoving = false;
   //Serial.println(">> resuming line following");
 }
-void av_turnLeft() {
+void av_pivotLeft() {
   analogWrite(ENA, turnSpeed );    // Right motor
   analogWrite(ENB, 0 );   // Left motor
   
@@ -231,7 +230,7 @@ void av_turnLeft() {
   wasMoving = true;
 }
 
-void av_turnRight() {
+void av_pivotRight() {
   analogWrite(ENA, 0 );   // Right motor
   analogWrite(ENB, turnSpeed );  //  Left motor
   
@@ -241,15 +240,13 @@ void av_turnRight() {
   digitalWrite(IN4, LOW);
   wasMoving = true;
 }
-// Short full stop between phases - makes each timed move repeatable
-// and stops the car coasting across the line at the handoff.
+
 void brakePause() {
   motorStop();
   delay(brakeTime);
 }
 
-
-void av_pivotRight(int speed, unsigned long ms) {
+void av_rotateRight(int speed, unsigned long ms) {
   digitalWrite(IN1, LOW);
   digitalWrite(IN2, HIGH);
   digitalWrite(IN3, HIGH);
@@ -265,8 +262,8 @@ void av_pivotRight(int speed, unsigned long ms) {
   motorStop();
 }
 
-// Pivot to the physical LEFT for a fixed time (opposite pin pattern).
-void av_pivotLeft(int speed, unsigned long ms) {
+// Rotate to the physical LEFT for a fixed time.
+void av_rotateLeft(int speed, unsigned long ms) {
   digitalWrite(IN1, HIGH);
   digitalWrite(IN2, LOW);
   digitalWrite(IN3, LOW);
@@ -330,16 +327,15 @@ void turn180(){
   turnL = 0;
   turnR = 0;
   brakePause();
-  av_pivotLeft(pivotSpeed, pivotOutTime + 200); 
+  av_rotateLeft(av_rotateSpeed, rotateOutTime + 200); 
   while(digitalRead(leftIR) == LOW){
-    turnLeft();
+    RotateTurnLeft();
   }
   brakePause();
   while(digitalRead(rightIR) == LOW){
-    av_turnRight();
+    av_pivotRight();
   }
     
-  //Serial.println(">>> phase 5: straightened")
   brakePause();
 }
 // ===================================================================
@@ -396,7 +392,7 @@ void moveForward() {
   digitalWrite(IN4, LOW);
 }
 
-void turnLeft() {
+void RotateTurnLeft() {
   analogWrite(ENA, turnSpeed + turnL);    // Right motor
   analogWrite(ENB, turnSpeed + turnL);   // Left motor
   
@@ -407,7 +403,7 @@ void turnLeft() {
   wasMoving = true;
 }
 
-void turnRight() {
+void RotateTurnRight() {
   analogWrite(ENA, turnSpeed + turnR);   // Right motor
   analogWrite(ENB, turnSpeed + turnR);  //  Left motor
   
