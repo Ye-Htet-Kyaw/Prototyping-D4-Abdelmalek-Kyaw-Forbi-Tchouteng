@@ -30,8 +30,8 @@ const int kickSpeed = 150;   // brief burst to START the motors
 const int kickTime  = 60;    // ms the burst lasts
 
 // --- Obstacle avoidance
-const int obstacleDistance       = 16;   // cm - trigger distance
-const int obstacleConfirm        = 3;    // confirmed readings before acting
+const int obstacleDistance       = 18;   // cm - trigger distance
+const int obstacleConfirm        = 2;    // confirmed readings before acting
 const unsigned long pingInterval = 60;   // ms between ultrasonic pings
 
 const int av_rotateSpeed             = 95;   // pivot speed for the 45-deg turns
@@ -97,9 +97,9 @@ void loop() {
     lastPingTime = millis();
     lastDistL = readDistanceCM(trigLeft, echoLeft);
     lastDistR = readDistanceCM(trigRight, echoRight);
-    long closest = min(lastDistL, lastDistR);
+    //long closest = min(lastDistL, lastDistR);
 
-    if (closest <= obstacleDistance) obstacleCheckCount++;
+    if (lastDistL <= obstacleDistance && lastDistR <= obstacleDistance) obstacleCheckCount++;
     else                             obstacleCheckCount = 0;
 
     if (obstacleCheckCount >= obstacleConfirm) {
@@ -210,9 +210,6 @@ void avoidObstacle() {
 
   while(digitalRead(leftIR) == LOW){
     av_pivotLeft();
-    delay(20);
-    motorStop();
-    delay(10);
   }
   //Serial.println(">>> phase 5: straightened");
   brakePause();
