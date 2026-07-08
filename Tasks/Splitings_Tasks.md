@@ -30,7 +30,7 @@
       <td style="padding: 10px; text-align: center;">3D printed holders using SolidWorks</td>
       <td style="padding: 10px; text-align: center;">Ir Sensor Holder<br>(7 May)</td>
       <td style="padding: 10px; text-align: center;">6 May</td>
-      <td style="padding: 10px; text-align: center;">Motor Holder<br>(7 May)</td>
+      <td style="padding: 10px; text-align: center;">Motor Holder left and right<br>(7 May)</td>
       <td style="padding: 10px; text-align: center;">6 May</td>
       <td style="padding: 10px; text-align: center;">Battery and Broad Board Holder<br>(7 May)</td>
       <td style="padding: 10px; text-align: center;">6 May</td>
@@ -56,7 +56,7 @@
       <td style="padding: 10px; text-align: center;">Validate circuit logic and sensor/actuator response through virtual prototyping</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
-      <td style="padding: 10px; text-align: center;">Simulation Rewiew</td>
+      <td style="padding: 10px; text-align: center;">Simulation Rewiew and using the tape for wiring to avoid spaghetti wiring</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
