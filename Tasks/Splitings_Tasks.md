@@ -56,7 +56,7 @@
       <td style="padding: 10px; text-align: center;">Validate circuit logic and sensor/actuator response through virtual prototyping</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
-      <td style="padding: 10px; text-align: center;">Simulation Review</td>
+      <td style="padding: 10px; text-align: center;">Simulation Rewiew</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
@@ -69,7 +69,7 @@
       <td style="padding: 10px; text-align: center;">Implement line-following algorithm and hardware integration</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation and <br>Hardware Verification Test</td>
       <td style="padding: 10px; text-align: center;">10 June</td>
-      <td style="padding: 10px; text-align: center;">Firmware Review and layout optimization</td>
+      <td style="padding: 10px; text-align: center;">tried a working version at my place and posted on github</td>
       <td style="padding: 10px; text-align: center;">10 June</td>
       <td style="padding: 10px; text-align: center;">Firmware Review</td>
       <td style="padding: 10px; text-align: center;">10 June</td>
@@ -82,7 +82,7 @@
       <td style="padding: 10px; text-align: center;">Implement obstacle avoidance logic and 180° turn maneuver</td>
       <td style="padding: 10px; text-align: center;">Firmware Implementation and<br>Hardware Verification Test</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
-      <td style="padding: 10px; text-align: center;">Firmware Review and layout optimization</td>
+      <td style="padding: 10px; text-align: center;">working on the Time controlling in the code, using the trouble shooting output which was posted on Github</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
       <td style="padding: 10px; text-align: center;">Firmware Review</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
