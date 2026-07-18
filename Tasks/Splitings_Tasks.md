@@ -40,7 +40,7 @@
     <tr>
       <td style="padding: 10px; text-align: center;">2</td>
       <td style="padding: 10px; text-align: center;">Task 1:System Modelling</td>
-      <td style="padding: 10px; text-align: center;">SML Diagrams for better understanding and<br> describing of the system</td>
+      <td style="padding: 10px; text-align: center;">SysML Diagrams for better understanding and<br> describing of the system</td>
       <td style="padding: 10px; text-align: center;">Sequence Diagram + Activities Diagram<br>(24 May)</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
       <td style="padding: 10px; text-align: center;">Requirement + Package Diagrams<br>(24 May)</td>
@@ -54,11 +54,11 @@
       <td style="padding: 10px; text-align: center;">3</td>
       <td style="padding: 10px; text-align: center;">Task 2: Tinkercad Simulation</td>
       <td style="padding: 10px; text-align: center;">Validate circuit logic and sensor/actuator response through virtual prototyping</td>
-      <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
+      <td style="padding: 10px; text-align: center;">Simulation Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
       <td style="padding: 10px; text-align: center;">Simulation Rewiew and using the tape for wiring to avoid spaghetti wiring</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
-      <td style="padding: 10px; text-align: center;">Firmware Implementation</td>
+      <td style="padding: 10px; text-align: center;">Simulation Firmware Implementation</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
       <td style="padding: 10px; text-align: center;">Simulation Review</td>
       <td style="padding: 10px; text-align: center;">24 May</td>
@@ -67,7 +67,7 @@
       <td style="padding: 10px; text-align: center;">4</td>
       <td style="padding: 10px; text-align: center;">Task 3 - milestone 1: Line Following</td>
       <td style="padding: 10px; text-align: center;">Implement line-following algorithm and hardware integration</td>
-      <td style="padding: 10px; text-align: center;">Firmware Implementation and <br>Hardware Verification Test</td>
+      <td style="padding: 10px; text-align: center;">Final Firmware Implementation and <br>Hardware Verification Test in Lab</td>
       <td style="padding: 10px; text-align: center;">10 June</td>
       <td style="padding: 10px; text-align: center;">tried a working version at my place and posted on github</td>
       <td style="padding: 10px; text-align: center;">10 June</td>
@@ -80,7 +80,7 @@
       <td style="padding: 10px; text-align: center;">5</td>
       <td style="padding: 10px; text-align: center;">Task 3 - milestone 2: Obstacle avoidance</td>
       <td style="padding: 10px; text-align: center;">Implement obstacle avoidance logic and 180° turn maneuver</td>
-      <td style="padding: 10px; text-align: center;">Firmware Implementation and<br>Hardware Verification Test</td>
+      <td style="padding: 10px; text-align: center;">Final Firmware Implementation and<br>Hardware Verification Test in Lab</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
       <td style="padding: 10px; text-align: center;">working on the Time controlling in the code, using the trouble shooting output which was posted on Github</td>
       <td style="padding: 10px; text-align: center;">24 June</td>
@@ -97,10 +97,23 @@
       <td style="padding: 10px; text-align: center;">02 July</td>
       <td style="padding: 10px; text-align: center;">Presenting and Slide Design: Physical Optimization <br> (06 July) </td>
       <td style="padding: 10px; text-align: center;">02 July</td>
-      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: system objective and performance results</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: system objective and performance results <br> (06 July)</td>
       <td style="padding: 10px; text-align: center;">02 July</td>
-      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: SML diagrams</td>
+      <td style="padding: 10px; text-align: center;">Presenting and Slide Design: SML diagrams <br> (06 July) </td>
       <td style="padding: 10px; text-align: center;">02 July</td>
+    </tr>
+    <tr>
+      <td style="padding: 10px; text-align: center;">7</td>
+      <td style="padding: 10px; text-align: center;">Final Report</td>
+      <td style="padding: 10px; text-align: center;"> Technical documentation of system architecture, firmware analysis, and final project review.</td>
+      <td style="padding: 10px; text-align: center;">Software/Control logic documentation, testing analysis, and final overall corrections <br> (26 July) </td>
+      <td style="padding: 10px; text-align: center;">18 July</td>
+      <td style="padding: 10px; text-align: center;"> Initial report drafting and Hardware design documentation, system challenges analysis <br> (26 July) </td>
+      <td style="padding: 10px; text-align: center;">18 July</td>
+      <td style="padding: 10px; text-align: center;">Proofreading, Hardware/System design review, and test/challenges content refinement</td>
+      <td style="padding: 10px; text-align: center;">18 July</td>
+      <td style="padding: 10px; text-align: center;">Proofreading and comprehensive report review<br> (26 July)</td>
+      <td style="padding: 10px; text-align: center;">18 July</td>
     </tr>
 
   </tbody>
